@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:table_calendar/table_calendar.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -8,22 +9,26 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  CalendarFormat format = CalendarFormat.month;
+  DateTime selectedDay = DateTime.now();
+  DateTime focusedDay=DateTime.now();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text("Home page"),
+          title: const Text("Flutter Calendar"),
+          centerTitle: true,
           backgroundColor: Colors.teal,
         ),
         drawer: Drawer(
             child: ListView(children: [
           Container(
             height: 60,
-            color: Colors.red,
+            //color: Colors.red,
             child: const Align(
               alignment: Alignment.centerLeft,
               child: Text(
-                " Google Calender",
+                " Google Calendar",
                 style: TextStyle(
                   color: Colors.black,
                   fontSize: 40,
@@ -43,9 +48,20 @@ class _HomePageState extends State<HomePage> {
             title: Text("Month"),
             leading: Icon(Icons.calendar_view_month),
           ),
-          Divider(
+          const Divider(
             color: Colors.black,
           )
-        ])));
+        ])),
+        body: TableCalendar(
+          focusedDay: DateTime.now(),
+          firstDay: DateTime(1900),
+          lastDay: DateTime(2050),
+          calendarFormat: format,
+          onFormatChanged: (CalendarFormat _format) {
+            setState(() {
+              format = _format;
+            });
+          },
+        ));
   }
 }
