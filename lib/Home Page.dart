@@ -11,7 +11,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   CalendarFormat format = CalendarFormat.month;
   DateTime selectedDay = DateTime.now();
-  DateTime focusedDay=DateTime.now();
+  DateTime focusedDay = DateTime.now();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,15 +53,29 @@ class _HomePageState extends State<HomePage> {
           )
         ])),
         body: TableCalendar(
-          focusedDay: DateTime.now(),
-          firstDay: DateTime(1900),
-          lastDay: DateTime(2050),
-          calendarFormat: format,
-          onFormatChanged: (CalendarFormat _format) {
-            setState(() {
-              format = _format;
-            });
-          },
-        ));
+            focusedDay: focusedDay,
+            firstDay: DateTime(1900),
+            lastDay: DateTime(2050),
+            calendarFormat: format,
+            onFormatChanged: (CalendarFormat _format) {
+              setState(() {
+                format = _format;
+              });
+            },
+            onDaySelected: (DateTime selectedDay, DateTime focusedDay) {
+              setState(() {
+                selectedDay = selectedDay;
+                focusedDay = focusedDay;
+              });
+              print(focusedDay);
+
+            },
+            calendarStyle: const CalendarStyle(
+              isTodayHighlighted: true,
+              selectedDecoration: BoxDecoration(
+                color: Colors.lightGreen,
+              )
+            ),
+            ));
   }
 }
