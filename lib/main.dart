@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'Home Page.dart';
+import 'calendar.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,9 +14,9 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Calender',
       theme: ThemeData(
-        primarySwatch: Colors.yellow,
+        primarySwatch: Colors.teal,
       ),
-      home: const HomePage(),
+      home: Calendar(),
     );
   }
 }
